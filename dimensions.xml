@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Your App Name">
+    <Require feature="rpc"/>
+    <Require feature="views"/>
+  </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+      <script src="//talkgadget.google.com/hangouts/_/api/hangout.js?v=1.1"></script>
+      <script src="//www.google.com/jsapi"></script>
+      <script>
+        var vieww, viewh, devw, devh, devavw, devavh, docw, doch;
+
+        function documentWidth() {
+          return Math.max(document.documentElement.clientWidth, document.documentElement.offsetWidth, document.documentElement.scrollWidth);
+        }
+
+        function documentHeight() {
+          return Math.max(document.documentElement.clientHeight,document.documentElement.offsetHeight,document.documentElement.scrollHeight);
+        }
+
+        var updateValues = function() {
+          vieww.textContent = document.documentElement.clientWidth;
+          viewh.textContent = document.documentElement.clientHeight;
+          devw.textContent = window.screen.width;
+          devh.textContent = window.screen.height;
+          devavw.textContent = window.screen.availWidth;
+          devavh.textContent = window.screen.availHeight;
+          docw.textContent = documentWidth();
+          doch.textContent = documentHeight();
+        }
+
+        function onReady() {
+          vieww = document.querySelector('#vieww');
+          viewh = document.querySelector('#viewh');
+          devw = document.querySelector('#devw');
+          devh = document.querySelector('#devh');
+          devavw = document.querySelector('#devavw');
+          devavh = document.querySelector('#devavh');
+          docw = document.querySelector('#docw');
+          doch = document.querySelector('#doch');
+
+          window.onresize = function() { updateValues() };
+
+          updateValues();
+        }
+
+        document.addEventListener("DOMContentLoaded", onReady);
+      </script>
+      <style>
+        .main {
+          overflow: scroll;
+        }
+      </style>
+      <div class="main">
+        <button onClick="javascript:updateValues()">Update Values</button>
+        <h2>Viewport</h2>
+        <p>width: <span id="vieww"></span></p>
+        <p>height: <span id="viewh"></span></p>
+        <h2>Device</h2>
+        <p>width: <span id="devw"></span></p>
+        <p>height: <span id="devh"></span></p>
+        <p>Width (minus UI taskbar if present): <span id="devavw"></span></p>
+        <p>Height (minus UI taskbar if present): <span id="devavh"></span></p>
+        <h2>Document</h2>
+        <p>width: <span id="docw"></span></p>
+        <p>height: <span id="doch"></span></p>
+      </div>  
+    ]]>
+  </Content>
+</Module>
